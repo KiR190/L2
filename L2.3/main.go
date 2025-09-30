@@ -1,5 +1,4 @@
-/* 
-
+/*
 Интерфейс считается nil только если оба поля — и тип, и значение — равны nil.
 Если тип присутствует, а значение — nil, — интерфейс не равен nil.
 
@@ -12,22 +11,21 @@ fmt.Println(err == nil) — сравнение с nil для интерфейс�
 Именно поэтому вывод:
 <nil>
 false
-
 */
 package main
 
 import (
-    "fmt"
-    "os"
+	"fmt"
+	"os"
 )
 
 func Foo() error {
-    var err *os.PathError = nil
-    return err
+	var err *os.PathError = nil
+	return err
 }
 
 func main() {
-    err := Foo()
-    fmt.Println(err)        // <nil>
-    fmt.Println(err == nil) // false
+	err := Foo()
+	fmt.Println(err)        // <nil>
+	fmt.Println(err == nil) // false
 }

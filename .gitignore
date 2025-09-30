@@ -1,0 +1,47 @@
+# Go build artifacts
+/L2.5/
+/L2.6/
+/L2.7/
+/L2.8/
+/L2.9/
+/L2.10/
+/L2.11/
+/L2.12/
+/L2.13/
+/L2.14/
+/L2.15/
+/L2.16/
+/L2.17/
+/L2.18/
+
+/bin/
+/build/
+/dist/
+/*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Logs
+*.log
+
+# Environment files
+.env
+*.env.local
+
+# Docker
+**/docker-data/
+**/tmp/
+**/.docker/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
