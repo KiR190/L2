@@ -1,6 +1,6 @@
-module ntp
+module ntp-time
 
-go 1.25.2
+go 1.24.5
 
 require github.com/beevik/ntp v1.5.0
 

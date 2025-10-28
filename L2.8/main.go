@@ -2,11 +2,9 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"os"
 	"time"
 
-	"github.com/beevik/ntp"
+	"ntp-time/internal/timeSync"
 )
 
 func main() {
@@ -15,25 +13,5 @@ func main() {
 	format := flag.String("format", time.RFC3339Nano, "Output time format")
 	flag.Parse()
 
-	opts := ntp.QueryOptions{
-		Timeout: *timeout,
-	}
-
-	// Выполняем запрос с опциями
-	resp, err := ntp.QueryWithOptions(*server, opts)
-	if err != nil {
-		// Печатаем ошибку в STDERR и выходим с кодом 1
-		fmt.Fprintln(os.Stderr, "ntp query failed:", err)
-		os.Exit(1)
-	}
-
-	if err := resp.Validate(); err != nil {
-		fmt.Fprintln(os.Stderr, "ntp response validation failed:", err)
-		os.Exit(1)
-	}
-
-	precise := time.Now().Add(resp.ClockOffset).UTC()
-
-	// Выводим в заданном формате на STDOUT
-	fmt.Println(precise.Format(*format))
+	timeSync.PrintCurrentTime(*server, *timeout, *format)
 }
