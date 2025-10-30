@@ -32,20 +32,13 @@ func main() {
 	port := flag.Arg(1)
 	addr := fmt.Sprintf("%s:%s", host, port)
 
-	// Котекст для завершения
+	// Контекст с таймаутом
 	ctx, cancel := context.WithTimeout(context.Background(), *timeout)
 	defer cancel()
 
-	sigCh := make(chan os.Signal, 1)
-	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
-	go func() {
-		select {
-		case <-sigCh:
-			log.Println("Получен сигнал завершения, закрываю соединение...")
-			cancel()
-		case <-ctx.Done():
-		}
-	}()
+	// Ctrl+C и SIGTERM через signal.NotifyContext
+	ctx, stop := signal.NotifyContext(ctx, syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
 
 	// Создаем и запускаем клиет
 	cl := client.New(addr, os.Stdin, os.Stdout)
