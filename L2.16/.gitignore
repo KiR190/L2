@@ -1,9 +1,8 @@
 # Go build artifacts
-/L2.18/
-
 /bin/
 /build/
 /dist/
+/site/
 /*.exe
 *.exe~
 *.dll
